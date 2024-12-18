@@ -71,7 +71,7 @@ function run() {
     const parts = output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
 
-    status = ["fail", "pass"][score == maxScore]
+    status = ["fail", "pass"][score === maxScore ? 1 : 0];
 
     result = generateResult(status, testName, command, output, endTime - startTime, maxScore, score)
   } catch (error) {
