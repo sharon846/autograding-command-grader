@@ -64,7 +64,7 @@ function run() {
     }
 
     startTime = new Date()
-    output = execSync(command, {timeout, env, stdio: 'pipe'})?.toString()
+    output = execSync(command, {timeout, env, stdio: 'inherit'})?.toString()
     endTime = new Date()
 
     const parts = output.split("Total Score: "); 
