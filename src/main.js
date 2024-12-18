@@ -22,7 +22,7 @@ function generateResult(status, testName, command, message, duration, maxScore, 
       {
         name: testName,
         status,
-        score: score : 0,
+        score: score,
         message,
         test_code: command,
         filename: '',
