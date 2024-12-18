@@ -64,12 +64,10 @@ function run() {
     }
 
     startTime = new Date()
-    output = execSync(command, {timeout, env, stdio: 'inherit'})?.toString()
+    output = execSync(command, {timeout, env, stdio: 'pipe'})?.toString()
     endTime = new Date()
 
-    console.log(output)
-
-    const parts = [50, 50]; //output.split("Total Score: "); 
+    const parts = output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
 
     result = generateResult('pass', testName, command, output, endTime - startTime, maxScore, score)
