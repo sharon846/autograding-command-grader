@@ -23,7 +23,7 @@ function generateResult(status, testName, command, message, duration, maxScore, 
         name: testName,
         status,
         score: score,
-        message,
+        message: message,
         test_code: command,
         filename: '',
         line_no: 0,
@@ -64,7 +64,7 @@ function run() {
     }
 
     startTime = new Date()
-    output = execSync(command, {timeout, env, stdio: ['pipe', 'pipe', 'inherit']})?.toString()
+    output = execSync(command, {timeout, env, stdio: 'pipe'})?.toString()
     endTime = new Date()
 
     const parts = output.split("Total Score: "); 
