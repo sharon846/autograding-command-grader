@@ -66,6 +66,7 @@ function run() {
     startTime = new Date()
     output = execSync(command, {timeout, env, stdio: 'pipe'})?.toString()
     endTime = new Date()
+    process.stdout.write(output);
 
     const parts = output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
