@@ -67,6 +67,8 @@ function run() {
     output = execSync(command, {timeout, env, stdio: 'inherit'})?.toString()
     endTime = new Date()
 
+    console.log(output)
+
     const parts = [50, 50]; //output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
 
