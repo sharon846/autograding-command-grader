@@ -13,7 +13,7 @@ function btoa(str) {
   return Buffer.from(str).toString('base64')
 }
 
-function generateResult(status, testName, command, message, duration, maxScore, score) {
+function generateResult(status, testName, command, message, duration, maxScore, score, failed_tests) {
   return {
     version: 1,
     status,
@@ -23,7 +23,8 @@ function generateResult(status, testName, command, message, duration, maxScore, 
         name: testName,
         status,
         score: score,
-        message: message,
+        message,
+        failed_tests: failed_tests,
         test_code: command,
         filename: '',
         line_no: 0,
@@ -70,14 +71,15 @@ function run() {
 
     const parts = output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
+    const failed_tests = parts[0].split("Failed in: ").trim(); 
 
     status = ["fail", "pass"][score === maxScore ? 1 : 0];
 
-    result = generateResult(status, testName, command, output, endTime - startTime, maxScore, score)
+    result = generateResult(status, testName, command, output, endTime - startTime, maxScore, score, failed_tests)
   } catch (error) {
     endTime = new Date()
     const {status, errorMessage} = getErrorMessageAndStatus(error, command)
-    result = generateResult(status, testName, command, errorMessage, endTime - startTime, maxScore, 0)
+    result = generateResult(status, testName, command, errorMessage, endTime - startTime, maxScore, 0, "")
   }
 
   core.setOutput('result', btoa(JSON.stringify(result)))
