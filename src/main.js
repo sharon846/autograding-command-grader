@@ -71,7 +71,7 @@ function run() {
 
     const parts = output.split("Total Score: "); 
     const score = parseInt(parts[1].trim());
-    const failed_tests = parts[0].split("Failed in: ").trim(); 
+    const failed_tests = parts[0].split("Failed in: ")[1].trim(); 
 
     status = ["fail", "pass"][score === maxScore ? 1 : 0];
 
